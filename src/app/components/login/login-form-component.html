@@ -1,0 +1,20 @@
+<mat-card class="login-card">
+  <mat-card-header class="center">
+    <mat-card-title>LOGIN APP MRO</mat-card-title>
+    <img src="../../../assets/img/logoTrans.png" alt="image">
+  </mat-card-header>
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <mat-card-content>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>No. Empleado</mat-label>
+          <input matInput placeholder="Ingresa el número de empleado" formControlName="loginFmr">
+          <mat-icon matSuffix>supervisor_account</mat-icon>
+        </mat-form-field>
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button type="submit">Ingresar</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

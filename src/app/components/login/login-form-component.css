@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0px;
+}
+
+img {
+  width: 150px;
+}
+
+.center {
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-card-actions{
+  justify-content: end;
+}
+
+button {
+  font-size: large;
+  margin: 0 0 1rem 0;
+}
