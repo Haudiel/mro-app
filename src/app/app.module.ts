@@ -11,12 +11,14 @@ import { MaterialModule } from './material-module';
 
 import { LoginFormComponent } from './components/login/login-form-component';
 import { OnePageComponent } from './components/page-one/one-component';
+import { TwoPageComponent } from './components/page-two/two-component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
-    OnePageComponent
+    OnePageComponent,
+    TwoPageComponent
   ],
   imports: [
     BrowserModule,
