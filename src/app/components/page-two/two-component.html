@@ -127,31 +127,41 @@
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
           <a [routerLink]="['/onePage']" class="nav-link link-dark" aria-current="page">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#home" />
+            </svg>
             Home
           </a>
         </li>
         <li>
           <a [routerLink]="['/twoPage']" class="nav-link active">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#speedometer2" />
+            </svg>
             Dashboard
           </a>
         </li>
         <li>
-          <a class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          <a [routerLink]="['/threePage']" class="nav-link link-dark">
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#table" />
+            </svg>
             Orders
           </a>
         </li>
         <li>
           <a class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
             Products
           </a>
         </li>
         <li>
           <a class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#people-circle" />
+            </svg>
             Customers
           </a>
         </li>
@@ -159,13 +169,71 @@
       <hr>
     </div>
 
-    <form [formGroup]="mroForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="outline">
-        <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      </mat-form-field>
-    </form>
+    <div class="container py-3">
+      <form [formGroup]="mroForm" class="row" style="padding: 15px;">
+
+        <div class="col-md-3 py-3">
+          <label class="form-label">No. Empleado del solicitante</label>
+          <input type="text" class="form-control shadow-2" placeholder="No.Empleado" formControlName="parte">
+        </div>
+
+        <div class="col-md-9 py-3">
+          <label class="form-label">Nombre del solicitante</label>
+          <input type="text" class="form-control shadow-2" placeholder="No.Empleado" formControlName="parte">
+        </div>
+
+        <div class="col-md-3 py-3">
+          <label class="form-label">No. Parte del fabricante</label>
+          <input type="text" class="form-control shadow-2" placeholder="No.Parte" formControlName="parte">
+        </div>
+
+        <div class="col-md-6 py-3">
+          <label class="form-label">Marca</label>
+          <input type="text" class="form-control shadow-2" placeholder="Marca" formControlName="parte">
+        </div>
+
+        <div class="col-md-3 py-3">
+          <label for="inputState" class="form-label">Critico</label>
+          <select id="inputState" class="form-control form-select shadow-2" formControlName="proyecto">
+            <option value="" disabled [selected]="'All'">Select</option>
+            <option value="SI">SI</option>
+            <option value="NO">NO</option>
+          </select>
+        </div>
+
+        <div class="col-md-12 py-3">
+          <label class="form-label">Descripción</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-6 py-3">
+          <label class="form-label">Fecuencia de cambio (Dias)</label>
+          <input type="text" class="form-control shadow-2" placeholder="Dias" formControlName="parte">
+        </div>
+
+        <div class="col-md-6 py-3">
+          <label class="form-label">Cantidad</label>
+          <input type="text" class="form-control shadow-2" placeholder="Cantidad" formControlName="parte">
+        </div>
+
+        <div class="col-md-12 py-3">
+          <label class="form-label">Linea o estación</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-12 py-3">
+          <label class="form-label">Justificación</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary mt-2">Save</button>
+        </div>
+      </form>
+
+
+    </div>
 
   </main>
 
@@ -176,4 +244,3 @@
 </body>
 
 </html>
-

@@ -12,13 +12,15 @@ import { MaterialModule } from './material-module';
 import { LoginFormComponent } from './components/login/login-form-component';
 import { OnePageComponent } from './components/page-one/one-component';
 import { TwoPageComponent } from './components/page-two/two-component';
+import { ThreePageComponent } from './components/page-three/three-component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
     OnePageComponent,
-    TwoPageComponent
+    TwoPageComponent,
+    ThreePageComponent
   ],
   imports: [
     BrowserModule,

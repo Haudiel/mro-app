@@ -126,32 +126,42 @@
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a [routerLink]="['/onePage']" class="nav-link active" aria-current="page">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+          <a [routerLink]="['/onePage']" class="nav-link link-dark" aria-current="page">
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#home" />
+            </svg>
             Home
           </a>
         </li>
         <li>
           <a [routerLink]="['/twoPage']" class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#speedometer2" />
+            </svg>
             Dashboard
           </a>
         </li>
         <li>
-          <a [routerLink]="['/threePage']" class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          <a [routerLink]="['/threePage']" class="nav-link active">
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#table" />
+            </svg>
             Orders
           </a>
         </li>
         <li>
           <a class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
             Products
           </a>
         </li>
         <li>
           <a class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#people-circle" />
+            </svg>
             Customers
           </a>
         </li>
@@ -159,28 +169,88 @@
       <hr>
     </div>
 
-    <script>
-        $( '#topheader .navbar-nav a' ).on('click',
-                    function () {
-            $( '#topheader .navbar-nav' ).find( 'li.active' )
-            .removeClass( 'active' );
-            $( this ).parent( 'li' ).addClass( 'active' );
-        });
-    </script>
 
-    <div class="container">
-      <p class="p-3 h3">Bienvenido: {{nomEmpleadoBnv}}</p>
+    <div class="container py-3">
+      <form [formGroup]="mroForm" class="row" style="padding: 15px;">
 
-      <div class="card">
-        <h5 class="card-header">Featured</h5>
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a class="btn btn-primary">Go somewhere</a>
+        <div class="col-md-3 py-3">
+          <label class="form-label">Tiempo de entrega</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
         </div>
-      </div>
-    </div>
 
+        <div class="col-md-3 py-3">
+          <label class="form-label">Punto de retorno</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-3 py-3">
+          <label class="form-label">Maximo de piezas</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-3 py-3">
+          <label class="form-label">Unidad</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-6 py-3">
+          <label class="form-label">Comodity</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-6 py-3">
+          <label class="form-label">Grupo de compra</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-12 py-3">
+          <label class="form-label">Importancia</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-3 py-3">
+          <label class="form-label">SP/CS</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-3 py-3">
+          <label class="form-label">Costo unitario</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-3 py-3">
+          <label class="form-label">Moneda</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-3 py-3">
+          <label class="form-label">Stdpack</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-4 py-3">
+          <label class="form-label">Indicador</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-4 py-3">
+          <label class="form-label">Proyeed</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-md-4 py-3">
+          <label class="form-label">MRO</label>
+          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary mt-2">Save</button>
+        </div>
+
+      </form>
+
+
+    </div>
 
   </main>
 
@@ -191,4 +261,3 @@
 </body>
 
 </html>
-
