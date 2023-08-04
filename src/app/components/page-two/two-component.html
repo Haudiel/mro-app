@@ -169,70 +169,73 @@
       <hr>
     </div>
 
-    <div class="container py-3">
-      <form [formGroup]="mroForm" class="row" style="padding: 15px;">
-
-        <div class="col-md-3 py-3">
-          <label class="form-label">No. Empleado del solicitante</label>
-          <input type="text" class="form-control shadow-2" placeholder="No.Empleado" formControlName="parte">
-        </div>
-
-        <div class="col-md-9 py-3">
-          <label class="form-label">Nombre del solicitante</label>
-          <input type="text" class="form-control shadow-2" placeholder="No.Empleado" formControlName="parte">
-        </div>
-
-        <div class="col-md-3 py-3">
-          <label class="form-label">No. Parte del fabricante</label>
-          <input type="text" class="form-control shadow-2" placeholder="No.Parte" formControlName="parte">
-        </div>
-
-        <div class="col-md-6 py-3">
-          <label class="form-label">Marca</label>
-          <input type="text" class="form-control shadow-2" placeholder="Marca" formControlName="parte">
-        </div>
-
-        <div class="col-md-3 py-3">
-          <label for="inputState" class="form-label">Critico</label>
-          <select id="inputState" class="form-control form-select shadow-2" formControlName="proyecto">
-            <option value="" disabled [selected]="'All'">Select</option>
-            <option value="SI">SI</option>
-            <option value="NO">NO</option>
-          </select>
-        </div>
-
-        <div class="col-md-12 py-3">
-          <label class="form-label">Descripción</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-        <div class="col-md-6 py-3">
-          <label class="form-label">Fecuencia de cambio (Dias)</label>
-          <input type="text" class="form-control shadow-2" placeholder="Dias" formControlName="parte">
-        </div>
-
-        <div class="col-md-6 py-3">
-          <label class="form-label">Cantidad</label>
-          <input type="text" class="form-control shadow-2" placeholder="Cantidad" formControlName="parte">
-        </div>
-
-        <div class="col-md-12 py-3">
-          <label class="form-label">Linea o estación</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-        <div class="col-md-12 py-3">
-          <label class="form-label">Justificación</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary mt-2">Save</button>
-        </div>
-      </form>
-
-
+    <div class="container">
+      <h3>
+        Inline Editing
+        <small>
+          <a
+            href="https://github.com/swimlane/ngx-datatable/blob/master/src/app/basic/inline.component.ts"
+            target="_blank"
+          >
+            Source
+          </a>
+        </small>
+      </h3>
+      <ngx-datatable
+        #mydatatable
+        class="material"
+        [headerHeight]="50"
+        [limit]="5"
+        [columnMode]="ColumnMode.force"
+        [footerHeight]="50"
+        rowHeight="auto"
+        [rows]="rows"
+      >
+        <ngx-datatable-column name="Name">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <div (dblclick)="editing[rowIndex + '-name'] = true">
+              <span
+                title="Double click to edit"
+                *ngIf="!editing[rowIndex + '-name']"
+              >
+                {{ value }}
+              </span>
+              <input
+                autofocus
+                (blur)="updateValue($event, 'name', rowIndex)"
+                *ngIf="editing[rowIndex + '-name']"
+                type="text"
+                [value]="value"
+              />
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Gender">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+            <span
+              title="Double click to edit"
+              (dblclick)="editing[rowIndex + '-gender'] = true"
+              *ngIf="!editing[rowIndex + '-gender']"
+            >
+              {{ value }}
+            </span>
+            <select
+              *ngIf="editing[rowIndex + '-gender']"
+              (blur)="editing[rowIndex + '-gender'] = false"
+              (change)="updateValue($event, 'gender', rowIndex)"
+              [value]="value"
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Age">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
     </div>
 
   </main>

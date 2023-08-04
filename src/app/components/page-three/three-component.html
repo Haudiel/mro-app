@@ -174,8 +174,8 @@
       <form [formGroup]="mroForm" class="row" style="padding: 15px;">
 
         <div class="col-md-3 py-3">
-          <label class="form-label">Tiempo de entrega</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+          <label class="form-label">Tiempo de entrega (Dias)</label>
+          <input type="number" min="0" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
         </div>
 
         <div class="col-md-3 py-3">
@@ -203,14 +203,23 @@
           <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
         </div>
 
-        <div class="col-md-12 py-3">
-          <label class="form-label">Importancia</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+        <div class="col-md-3 py-3">
+          <label for="inputState" class="form-label">Importancia</label>
+          <select id="inputState" class="form-control form-select shadow-2" formControlName="proyecto">
+            <option value="" disabled [selected]="'All'">Select</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+          </select>
         </div>
 
         <div class="col-md-3 py-3">
-          <label class="form-label">SP/CS</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+          <label for="inputState" class="form-label">SP/CS</label>
+          <select id="inputState" class="form-control form-select shadow-2" formControlName="proyecto">
+            <option value="" disabled [selected]="'All'">Select</option>
+            <option value="A">SP</option>
+            <option value="B">CS</option>
+          </select>
         </div>
 
         <div class="col-md-3 py-3">
@@ -219,8 +228,12 @@
         </div>
 
         <div class="col-md-3 py-3">
-          <label class="form-label">Moneda</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
+          <label for="inputState" class="form-label">Moneda</label>
+          <select id="inputState" class="form-control form-select shadow-2" formControlName="proyecto">
+            <option value="" disabled [selected]="'All'">Select</option>
+            <option value="A">USD</option>
+            <option value="B">MXN</option>
+          </select>
         </div>
 
         <div class="col-md-3 py-3">

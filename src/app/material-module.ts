@@ -41,6 +41,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 @NgModule({
   exports: [
     A11yModule,
@@ -86,6 +88,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     PortalModule,
     ScrollingModule,
     MatFormFieldModule,
+    NgxDatatableModule,
   ]
 })
 export class MaterialModule {}
