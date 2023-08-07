@@ -134,11 +134,11 @@
           </a>
         </li>
         <li>
-          <a [routerLink]="['/twoPage']" class="nav-link active">
+          <a [routerLink]="['/solicitud']" class="nav-link active">
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#speedometer2" />
             </svg>
-            Dashboard
+            Solicitar
           </a>
         </li>
         <li>
@@ -169,74 +169,107 @@
       <hr>
     </div>
 
-    <div class="container">
-      <h3>
-        Inline Editing
-        <small>
-          <a
-            href="https://github.com/swimlane/ngx-datatable/blob/master/src/app/basic/inline.component.ts"
-            target="_blank"
-          >
-            Source
-          </a>
-        </small>
-      </h3>
-      <ngx-datatable
-        #mydatatable
-        class="material"
-        [headerHeight]="50"
-        [limit]="5"
-        [columnMode]="ColumnMode.force"
-        [footerHeight]="50"
-        rowHeight="auto"
-        [rows]="rows"
-      >
-        <ngx-datatable-column name="Name">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <div (dblclick)="editing[rowIndex + '-name'] = true">
-              <span
-                title="Double click to edit"
-                *ngIf="!editing[rowIndex + '-name']"
-              >
-                {{ value }}
-              </span>
-              <input
-                autofocus
-                (blur)="updateValue($event, 'name', rowIndex)"
-                *ngIf="editing[rowIndex + '-name']"
-                type="text"
-                [value]="value"
-              />
-            </div>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Gender">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
-            <span
-              title="Double click to edit"
-              (dblclick)="editing[rowIndex + '-gender'] = true"
-              *ngIf="!editing[rowIndex + '-gender']"
-            >
-              {{ value }}
-            </span>
-            <select
-              *ngIf="editing[rowIndex + '-gender']"
-              (blur)="editing[rowIndex + '-gender'] = false"
-              (change)="updateValue($event, 'gender', rowIndex)"
-              [value]="value"
-            >
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Age">
-          <ng-template ngx-datatable-cell-template let-value="value">
-            {{ value }}
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
+
+    <div>
+      <div>
+        <p class="p-3 h4">Nombre del solicitante: {{nomEmpleadoBnv}}</p>
+        <p class="p-3 h4">Departamento: {{dept}}</p>
+        <p class="p-3 h4">Folio: {{folio}}</p>
+      </div>
+      <div>
+
+        <form [formGroup]="userTable" class="p-3">
+          <table class="table table-border" [ngClass]="{'table-dark': mode}">
+            <thead class="text-nowrap">
+              <th>Critico (Si/NO) <span class="ui-column-resizer" dragableColumn> </span></th>
+              <th>No. Parte de fabricante<span class="ui-column-resizer" dragableColumn> </span></th>
+              <th>Marca<span class="ui-column-resizer" dragableColumn> </span></th>
+              <th>Descripción<span class="ui-column-resizer" dragableColumn> </span></th>
+              <th>Frecuencia de cambio<span class="ui-column-resizer" dragableColumn> </span></th>
+              <th>Cantidad instalada<span class="ui-column-resizer" dragableColumn> </span></th>
+              <th></th>
+            </thead>
+            <tbody>
+              <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
+                <tr *ngIf="group.get('isEditable')?.value" [formGroupName]="i">
+                  <td>
+                    <mat-form-field>
+                      <mat-select formControlName="critico">
+                        <mat-option value="SI">SI</mat-option>
+                        <mat-option value="NO">NO</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field>
+                      <input matInput type="text" formControlName="noParte">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field>
+                      <input matInput type="text" formControlName="marca">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field>
+                      <input matInput type="text" formControlName="descripcion">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field>
+                      <input matInput type="number" min="0" formControlName="frecuenciaCambio">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field>
+                      <input matInput type="number" min="0" formControlName="cantidadInstaladas">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-icon class="delete" (click)="deleteRow(i)">delete_forever</mat-icon>
+                    <mat-icon class="done" (click)="doneRow(group)">done</mat-icon>
+                  </td>
+                </tr>
+                <tr *ngIf="!group.get('isEditable')?.value">
+                  <td>
+                    {{group.get('critico')?.value}}
+                  </td>
+                  <td>
+                    {{group.get('noParte')?.value}}
+                  </td>
+                  <td>
+                    {{group.get('marca')?.value}}
+                  </td>
+                  <td>
+                    {{group.get('descripcion')?.value}}
+                  </td>
+                  <td>
+                    {{group.get('frecuenciaCambio')?.value}}
+                  </td>
+                  <td>
+                    {{group.get('cantidadInstaladas')?.value}}
+                  </td>
+                  <td>
+                    <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+          <div class="action-container">
+            <button mat-raised-button type="submit" (click)="addRow()">Add row</button>
+            <button mat-raised-button [disabled]="userTable.invalid" type="submit" (click)="submitForm()">Submit</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="output">
+        <p>Form Data: {{userTable.value | json}}</p>
+        <p>Is Valid: {{userTable.valid}}</p>
+      </div>
     </div>
+
+
 
   </main>
 

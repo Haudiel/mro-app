@@ -11,18 +11,16 @@ import { MaterialModule } from './material-module';
 
 import { LoginFormComponent } from './components/login/login-form-component';
 import { OnePageComponent } from './components/page-one/one-component';
-import { TwoPageComponent } from './components/page-two/two-component';
-import { ThreePageComponent } from './components/page-three/three-component';
 import { PageTable } from './components/page-table/page-table';
+import { SolicitudComponent } from './components/solicitud/solicitud-component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
     OnePageComponent,
-    TwoPageComponent,
-    ThreePageComponent,
-    PageTable
+    PageTable,
+    SolicitudComponent
   ],
   imports: [
     BrowserModule,

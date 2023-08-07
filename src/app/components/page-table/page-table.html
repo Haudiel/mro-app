@@ -127,31 +127,41 @@
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
           <a [routerLink]="['/onePage']" class="nav-link active" aria-current="page">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#home" />
+            </svg>
             Home
           </a>
         </li>
         <li>
           <a [routerLink]="['/twoPage']" class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#speedometer2" />
+            </svg>
             Dashboard
           </a>
         </li>
         <li>
           <a [routerLink]="['/threePage']" class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#table" />
+            </svg>
             Orders
           </a>
         </li>
         <li>
           <a class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#grid" />
+            </svg>
             Products
           </a>
         </li>
         <li>
           <a class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#people-circle" />
+            </svg>
             Customers
           </a>
         </li>
@@ -159,30 +169,94 @@
       <hr>
     </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Columna 1</th>
-          <th>Columna 2</th>
-          <!-- Agrega más columnas según tus necesidades -->
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of data">
-          <td contenteditable="true" (input)="updateColumn1($event, item)">{{ item.columna1 }}</td>
-          <td contenteditable="true" (input)="updateColumn2($event, item)">{{ item.columna2 }}</td>
-          <!-- Agrega más columnas según tus necesidades -->
-        </tr>
-        <tr>
-          <td contenteditable="true" [(ngModel)]="newRow.columna1"></td>
-          <td contenteditable="true" [(ngModel)]="newRow.columna2"></td>
-          <!-- Agrega más columnas según tus necesidades -->
-          <td>
-            <button (click)="addRow()">Agregar Fila</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <form [formGroup]="userTable">
+      <table class="table table-border" [ngClass]="{'table-dark': mode}">
+        <thead class="text-nowrap">
+          <th>Critico (Si/NO) <span class="ui-column-resizer" dragableColumn> </span></th>
+          <th>No. Parte de fabricante<span class="ui-column-resizer" dragableColumn> </span></th>
+          <th>Marca<span class="ui-column-resizer" dragableColumn> </span></th>
+          <th>Descripción<span class="ui-column-resizer" dragableColumn> </span></th>
+          <th>Frecuencia de cambio<span class="ui-column-resizer" dragableColumn> </span></th>
+          <th>Cantidad instalada<span class="ui-column-resizer" dragableColumn> </span></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
+            <tr *ngIf="group.get('isEditable')?.value" [formGroupName]="i">
+              <td>
+                <mat-form-field>
+                  <mat-select formControlName="critico">
+                    <mat-option value="SI">SI</mat-option>
+                    <mat-option value="NO">NO</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput type="text" formControlName="noParte">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput type="text" formControlName="marca">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput type="text" formControlName="descripcion">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput type="number" min="0" formControlName="frecuenciaCambio">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput type="number" min="0" formControlName="cantidadInstaladas">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-icon class="delete" (click)="deleteRow(i)">delete_forever</mat-icon>
+                <mat-icon class="done" (click)="doneRow(group)">done</mat-icon>
+              </td>
+            </tr>
+            <tr *ngIf="!group.get('isEditable')?.value">
+              <td>
+                {{group.get('critico')?.value}}
+              </td>
+              <td>
+                {{group.get('noParte')?.value}}
+              </td>
+              <td>
+                {{group.get('marca')?.value}}
+              </td>
+              <td>
+                {{group.get('descripcion')?.value}}
+              </td>
+              <td>
+                {{group.get('frecuenciaCambio')?.value}}
+              </td>
+              <td>
+                {{group.get('cantidadInstaladas')?.value}}
+              </td>
+              <td>
+                <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      <div class="action-container">
+        <button mat-raised-button type="submit" (click)="addRow()">Add row</button>
+        <button mat-raised-button [disabled]="userTable.invalid" type="submit" (click)="submitForm()">Submit</button>
+      </div>
+    </form>
+
+    <div class="output">
+      <p>Form Data: {{userTable.value | json}}</p>
+      <p>Is Valid: {{userTable.valid}}</p>
+    </div>
 
 
 
@@ -195,4 +269,3 @@
 </body>
 
 </html>
-

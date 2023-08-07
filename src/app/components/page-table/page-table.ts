@@ -1,74 +1,77 @@
-import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { Router } from "@angular/router";
-import { StorageService } from "src/app/services/data-storage.service";
-import { NavigationService } from "src/app/services/navigation.service";
-import { HttpsService } from "src/app/services/servicios.service";
-
-export interface Tile {
-  color: string;
-  cols: number;
-  rows: number;
-  text: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'one-component',
+  selector: 'app-user-table',
   templateUrl: './page-table.html',
-  styleUrls: ['./page-table.css'],
+  styleUrls: ['./page-table.css']
 })
+export class PageTable implements OnInit {
 
-
-export class PageTable implements OnInit{
-
-  constructor(private storage: StorageService, public router: Router, private https: HttpsService, private navigationService: NavigationService) {
-  }
-
-  data: any[] = [];
-  newRow: any = {};
-
-  addRow() {
-    this.data.push(this.newRow);
-    this.newRow = {};
-  }
-
-  updateColumn1(event: Event, item: any) {
-    const inputValue = (event.target as HTMLTableCellElement).textContent;
-    if (inputValue !== null) {
-      item.columna1 = inputValue;
-    }
-  }
-
-  updateColumn2(event: Event, item: any) {
-    const inputValue = (event.target as HTMLTableCellElement).textContent;
-    if (inputValue !== null) {
-      item.columna2 = inputValue;
-    }
-  }
-
-  nomEmpleadoBnv = this.storage.empleadoBnvGet()
-  Active: String = ''
-
-  tiles: Tile[] = [
-    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
-  ];
+  userTable!: FormGroup;
+  control!: FormArray;
+  mode!: boolean;
+  touchedRows: any;
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    // Establecer el estado de la navegación a true cuando se carga la segunda página.
-    this.navigationService.setEnteredSecondPage(true);
+    this.touchedRows = [];
+    this.userTable = this.fb.group({
+      tableRows: this.fb.array([])
+    });
+    this.addRow();
   }
 
-  submit() {
+  ngAfterOnInit() {
+    this.control = this.userTable.get('tableRows') as FormArray;
   }
 
-  Home(){
-    this.router.navigateByUrl('login')
+  initiateForm(): FormGroup {
+    return this.fb.group({
+      critico: ['', Validators.required],
+      noParte: ['', [Validators.required]],
+      marca: ['', [Validators.required]],
+      descripcion: ['',[Validators.required]],
+      frecuenciaCambio: ['', [Validators.required, Validators.maxLength(10)]],
+      cantidadInstaladas: ['', [Validators.required]],
+      isEditable: [true]
+    });
   }
 
-  @Input() error: string | null | undefined;
+  addRow() {
+    const control =  this.userTable.get('tableRows') as FormArray;
+    control.push(this.initiateForm());
+  }
 
-  @Output() submitEM = new EventEmitter();
+  deleteRow(index: number) {
+    const control =  this.userTable.get('tableRows') as FormArray;
+    control.removeAt(index);
+  }
+
+  editRow(group: FormGroup) {
+    group.get('isEditable')?.setValue(true);
+  }
+
+  doneRow(group: FormGroup) {
+    group.get('isEditable')?.setValue(false);
+  }
+
+  saveUserDetails() {
+    console.log(this.userTable.value);
+  }
+
+  get getFormControls() {
+    const control = this.userTable.get('tableRows') as FormArray;
+    return control;
+  }
+
+  submitForm() {
+    const control = this.userTable.get('tableRows') as FormArray;
+    this.touchedRows = control.controls.filter(row => row.touched).map(row => row.value);
+    console.log(this.touchedRows);
+  }
+
+  toggleTheme() {
+    this.mode = !this.mode;
+  }
 }

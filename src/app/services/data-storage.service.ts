@@ -23,6 +23,22 @@ export class StorageService {
     return localStorage.getItem('empleadoBnv')
   }
 
+  departamentoSet(dept:string){
+    localStorage.setItem('dept', dept)
+  }
+
+  departamentoGet(){
+    return localStorage.getItem('dept')
+  }
+
+  folioSet(folio: string){
+    localStorage.setItem('folio', folio)
+  }
+
+  folioGet(){
+    return localStorage.getItem('folio')
+  }
+
   clearObject(name:string){
     localStorage.removeItem(name);
   }

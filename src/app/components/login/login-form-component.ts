@@ -68,6 +68,7 @@ export class LoginFormComponent implements OnInit {
     this.https.DataUser(this.loginForm.value.loginFmr).subscribe((resp:IEmpleado) => {
       this.dataEmpleado.push(resp);
       this.storage.empleadoBnvSet(resp.name)
+      this.storage.departamentoSet(resp.descr)
       this.message = "ok";
     },
       e => {

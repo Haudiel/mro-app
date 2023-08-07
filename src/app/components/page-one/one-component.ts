@@ -27,13 +27,6 @@ export class OnePageComponent implements OnInit{
   nomEmpleadoBnv = this.storage.empleadoBnvGet()
   Active: String = ''
 
-  tiles: Tile[] = [
-    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
-  ];
-
   ngOnInit(): void {
     // Establecer el estado de la navegación a true cuando se carga la segunda página.
     this.navigationService.setEnteredSecondPage(true);
