@@ -126,42 +126,32 @@
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a [routerLink]="['/onePage']" class="nav-link link-dark" aria-current="page">
-            <svg class="bi me-2" width="16" height="16">
-              <use xlink:href="#home" />
-            </svg>
+          <a [routerLink]="['/onePage']" class="nav-link active" aria-current="page">
+            <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
             Home
           </a>
         </li>
         <li>
           <a [routerLink]="['/twoPage']" class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16">
-              <use xlink:href="#speedometer2" />
-            </svg>
+            <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
             Dashboard
           </a>
         </li>
         <li>
-          <a [routerLink]="['/threePage']" class="nav-link active">
-            <svg class="bi me-2" width="16" height="16">
-              <use xlink:href="#table" />
-            </svg>
+          <a [routerLink]="['/threePage']" class="nav-link link-dark">
+            <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
             Orders
           </a>
         </li>
         <li>
           <a class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16">
-              <use xlink:href="#grid" />
-            </svg>
+            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
             Products
           </a>
         </li>
         <li>
           <a class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16">
-              <use xlink:href="#people-circle" />
-            </svg>
+            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
             Customers
           </a>
         </li>
@@ -169,101 +159,32 @@
       <hr>
     </div>
 
-
-    <div class="container py-3">
-      <form  class="row" style="padding: 15px;">
-
-        <div class="col-md-3 py-3">
-          <label class="form-label">Tiempo de entrega (Dias)</label>
-          <input type="number" min="0" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-        <div class="col-md-3 py-3">
-          <label class="form-label">Punto de retorno</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-        <div class="col-md-3 py-3">
-          <label class="form-label">Maximo de piezas</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-        <div class="col-md-3 py-3">
-          <label class="form-label">Unidad</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-        <div class="col-md-6 py-3">
-          <label class="form-label">Comodity</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-        <div class="col-md-6 py-3">
-          <label class="form-label">Grupo de compra</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-        <div class="col-md-3 py-3">
-          <label for="inputState" class="form-label">Importancia</label>
-          <select id="inputState" class="form-control form-select shadow-2" formControlName="proyecto">
-            <option value="" disabled [selected]="'All'">Select</option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-          </select>
-        </div>
-
-        <div class="col-md-3 py-3">
-          <label for="inputState" class="form-label">SP/CS</label>
-          <select id="inputState" class="form-control form-select shadow-2" formControlName="proyecto">
-            <option value="" disabled [selected]="'All'">Select</option>
-            <option value="A">SP</option>
-            <option value="B">CS</option>
-          </select>
-        </div>
-
-        <div class="col-md-3 py-3">
-          <label class="form-label">Costo unitario</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-        <div class="col-md-3 py-3">
-          <label for="inputState" class="form-label">Moneda</label>
-          <select id="inputState" class="form-control form-select shadow-2" formControlName="proyecto">
-            <option value="" disabled [selected]="'All'">Select</option>
-            <option value="A">USD</option>
-            <option value="B">MXN</option>
-          </select>
-        </div>
-
-        <div class="col-md-3 py-3">
-          <label class="form-label">Stdpack</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-        <div class="col-md-4 py-3">
-          <label class="form-label">Indicador</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-        <div class="col-md-4 py-3">
-          <label class="form-label">Proyeed</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-        <div class="col-md-4 py-3">
-          <label class="form-label">MRO</label>
-          <input type="text" class="form-control shadow-2" placeholder="Descripcion" formControlName="parte">
-        </div>
-
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary mt-2">Save</button>
-        </div>
-
-      </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Columna 1</th>
+          <th>Columna 2</th>
+          <!-- Agrega más columnas según tus necesidades -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data">
+          <td contenteditable="true" (input)="updateColumn1($event, item)">{{ item.columna1 }}</td>
+          <td contenteditable="true" (input)="updateColumn2($event, item)">{{ item.columna2 }}</td>
+          <!-- Agrega más columnas según tus necesidades -->
+        </tr>
+        <tr>
+          <td contenteditable="true" [(ngModel)]="newRow.columna1"></td>
+          <td contenteditable="true" [(ngModel)]="newRow.columna2"></td>
+          <!-- Agrega más columnas según tus necesidades -->
+          <td>
+            <button (click)="addRow()">Agregar Fila</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
 
-    </div>
 
   </main>
 
@@ -274,3 +195,4 @@
 </body>
 
 </html>
+

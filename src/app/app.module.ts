@@ -13,6 +13,7 @@ import { LoginFormComponent } from './components/login/login-form-component';
 import { OnePageComponent } from './components/page-one/one-component';
 import { TwoPageComponent } from './components/page-two/two-component';
 import { ThreePageComponent } from './components/page-three/three-component';
+import { PageTable } from './components/page-table/page-table';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ThreePageComponent } from './components/page-three/three-component';
     LoginFormComponent,
     OnePageComponent,
     TwoPageComponent,
-    ThreePageComponent
+    ThreePageComponent,
+    PageTable
   ],
   imports: [
     BrowserModule,
