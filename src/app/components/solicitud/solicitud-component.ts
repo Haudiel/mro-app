@@ -14,7 +14,17 @@ export class SolicitudComponent implements OnInit {
   control!: FormArray;
   mode!: boolean;
   touchedRows: any;
-  constructor(private fb: FormBuilder, private storage: StorageService, private https: HttpsService) { }
+  constructor(private fb: FormBuilder, private storage: StorageService, private https: HttpsService) {
+    // this.https.InsertMRO()
+    //   .subscribe(resp => {
+    //     console.log(resp);
+
+    //   },
+    //     e => { // second parameter is to listen for error
+    //       console.log(e.error);
+    //     }
+    //   )
+  }
 
   nomEmpleadoBnv = this.storage.empleadoBnvGet()
   dept = this.storage.departamentoGet()
@@ -26,6 +36,7 @@ export class SolicitudComponent implements OnInit {
       tableRows: this.fb.array([])
     });
     this.addRow();
+
   }
 
   obtenerHoraHermosillo() {
@@ -50,11 +61,11 @@ export class SolicitudComponent implements OnInit {
   initiateForm(): FormGroup {
     return this.fb.group({
       critico: ['', Validators.required],
-      noParte: ['', [Validators.required]],
+      noParteFab: ['', [Validators.required]],
       marca: ['', [Validators.required]],
-      descripcion: ['', [Validators.required]],
-      frecuenciaCambio: ['', [Validators.required, Validators.maxLength(10)]],
-      cantidadInstaladas: ['', [Validators.required]],
+      descr: ['', [Validators.required]],
+      frecuencia: ['', [Validators.required, Validators.maxLength(10)]],
+      cantidad: ['', [Validators.required, Validators.maxLength(10)]],
       isEditable: [true]
     });
   }
@@ -86,28 +97,39 @@ export class SolicitudComponent implements OnInit {
     return control;
   }
 
+
+
   submitForm() {
     const control = this.userTable.get('tableRows') as FormArray;
     this.touchedRows = control.controls.filter(row => row.touched).map(row => row.value);
 
-    for(const {
-      critico,
-      noParte,
-      marca,
-      descripcion,
-      frecuenciaCambio,
-      cantidad,
-    } of this.touchedRows){
-      this.https.InsertData(critico,noParte,marca,descripcion,frecuenciaCambio,cantidad, "ASP", "JUST")
-      console.log(critico)
-      console.log(noParte)
-      console.log(marca)
-      console.log(descripcion)
-      console.log(frecuenciaCambio)
-      console.log(cantidad)
-    }
 
-    console.log(this.touchedRows);
+    this.touchedRows.forEach((value: any) => {
+      console.log(value);
+      this.https.InsertMRO(value.critico, value.noParteFab, value.marca, value.descr, value.frecuencia, value.cantidad, "ASP", "JUST")
+        .subscribe(resp => {
+          console.log(resp);
+
+        },
+          e => { // second parameter is to listen for error
+            console.log(e.error);
+          }
+        )
+    });
+
+    // for(const {
+    //   critico,
+    //   noParte,
+    //   marca,
+    //   descripcion,
+    //   frecuenciaCambio,
+    //   cantidad,
+    // } of this.touchedRows){
+    //   console.log(cantidad)
+    //   this.https.InsertData(critico,noParte,marca,descripcion,frecuenciaCambio,cantidad, "ASP", "JUST")
+    // }
+
+    // console.log(this.touchedRows);
   }
 
   toggleTheme() {

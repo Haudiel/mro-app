@@ -202,7 +202,7 @@
                   </td>
                   <td>
                     <mat-form-field>
-                      <input matInput type="text" formControlName="noParte">
+                      <input matInput type="text" formControlName="noParteFab">
                     </mat-form-field>
                   </td>
                   <td>
@@ -212,17 +212,17 @@
                   </td>
                   <td>
                     <mat-form-field>
-                      <input matInput type="text" formControlName="descripcion">
+                      <input matInput type="text" formControlName="descr">
                     </mat-form-field>
                   </td>
                   <td>
                     <mat-form-field>
-                      <input matInput type="number" min="0" formControlName="frecuenciaCambio">
+                      <input matInput type="number" min="0" formControlName="frecuencia">
                     </mat-form-field>
                   </td>
                   <td>
                     <mat-form-field>
-                      <input matInput type="number" min="0" formControlName="cantidadInstaladas">
+                      <input matInput type="number" min="0" formControlName="cantidad">
                     </mat-form-field>
                   </td>
                   <td>
@@ -235,19 +235,19 @@
                     {{group.get('critico')?.value}}
                   </td>
                   <td>
-                    {{group.get('noParte')?.value}}
+                    {{group.get('noParteFab')?.value}}
                   </td>
                   <td>
                     {{group.get('marca')?.value}}
                   </td>
                   <td>
-                    {{group.get('descripcion')?.value}}
+                    {{group.get('descr')?.value}}
                   </td>
                   <td>
-                    {{group.get('frecuenciaCambio')?.value}}
+                    {{group.get('frecuencia')?.value}}
                   </td>
                   <td>
-                    {{group.get('cantidadInstaladas')?.value}}
+                    {{group.get('cantidad')?.value}}
                   </td>
                   <td>
                     <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
@@ -258,7 +258,8 @@
           </table>
           <div class="action-container">
             <button mat-raised-button type="submit" (click)="addRow()">Add row</button>
-            <button mat-raised-button [disabled]="userTable.invalid" type="submit" (click)="submitForm()">Submit</button>
+            <button mat-raised-button [disabled]="userTable.invalid" type="submit"
+              (click)="submitForm()">Submit</button>
           </div>
         </form>
       </div>
