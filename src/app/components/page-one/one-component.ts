@@ -24,13 +24,36 @@ export class OnePageComponent implements OnInit{
   constructor(private storage: StorageService, public router: Router, private https: HttpsService, private navigationService: NavigationService) {
   }
 
+  objetosPorFolio: { [folio: string]: any[] } = {};
+
   nomEmpleadoBnv = this.storage.empleadoBnvGet()
   Active: String = ''
 
   ngOnInit(): void {
     // Establecer el estado de la navegación a true cuando se carga la segunda página.
     this.navigationService.setEnteredSecondPage(true);
+
+    this.https.GetDataSolicitud().subscribe(data => {
+      console.log(data)
+      data.forEach((objeto:any) => {
+        const folio = objeto.folio;
+
+        // Si el folio no existe en el objeto de agrupación, lo creamos como un arreglo vacío
+        if (!this.objetosPorFolio[folio]) {
+          this.objetosPorFolio[folio] = [];
+        }
+
+        // Agregamos el objeto actual al arreglo correspondiente al folio
+        this.objetosPorFolio[folio].push(objeto);
+      });
+    })
+
+    console.log(this.objetosPorFolio)
+
   }
+
+
+
 
   submit() {
   }

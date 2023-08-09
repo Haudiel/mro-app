@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageService } from './data-storage.service';
+import { SolicitudComponent } from '../components/solicitud/solicitud-component';
 
 export interface IEmpleado {
   employeeID: string;
@@ -59,38 +60,7 @@ export class HttpsService {
     return this.http.post<any>('http://localhost:5016/api/Usuarios/InsertData', skipLot, httpOptions);
   }
 
-  // InsertData( critico: string, noParte: string, marca:string, desc: string, frecuencia:number, cantidad: number, linea:string, just:string) {
-  InsertData(DataRows: any[]) {
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
-    }
-
-    var skipLot =
-    {
-      "critico": "NO",
-      "noParteFab": "sdsd",
-      "marca": "sdsd",
-      "descr": "sdsd",
-      "frecuencia": 2,
-      "cantidad": 3
-    }
-
-    var body = {
-      "folio": "ssadasd",
-      "numComprador": "asdsds",
-      "nombreComprador": "asdsda",
-      "nombreSolicitante": "asdasd",
-      "critico": "asdsad",
-      "noParteFab": "ddddd",
-      "marca": "wwwww",
-      "descr": "qqqq",
-      "frecuencia": 5,
-      "cantidad": 8,
-      "lineaEstacionTrabajo": "sggg",
-      "justificacion": "dddfff"
-    };
-
-    console.log(DataRows)
-    return this.http.post('http://localhost:5016/api/Usuarios/InsertData', skipLot);
+  GetDataSolicitud(){
+    return this.http.get<any>(this.url + `Usuarios/GetDataSolicitud?emplid=${this.storage.noEmpleadoGet()}`);
   }
 }
