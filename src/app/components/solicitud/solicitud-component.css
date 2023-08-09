@@ -42,3 +42,38 @@ span.ui-column-resizer {
   padding: 30px;
 
 }
+
+table{
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+thead > th {
+  background: #6db3f2;
+    background: -moz-linear-gradient(top, #6db3f2 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%);
+    background: -webkit-linear-gradient(top, #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%);
+    background: linear-gradient(to bottom, #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', endColorstr='#1e69de',GradientType=0 );
+    color: white;
+    text-align: center;
+    font-weight: 400;
+}
+
+.mat-mdc-form-field {
+
+  --mat-mdc-form-field-floating-label-scale: 0.75;
+  display: block;
+  flex-direction: column;
+  min-width: 0;
+  text-align: left;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  height: 0;
+}
+
+td {
+  vertical-align: middle;
+}

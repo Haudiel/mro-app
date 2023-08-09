@@ -116,20 +116,6 @@ export class SolicitudComponent implements OnInit {
           }
         )
     });
-
-    // for(const {
-    //   critico,
-    //   noParte,
-    //   marca,
-    //   descripcion,
-    //   frecuenciaCambio,
-    //   cantidad,
-    // } of this.touchedRows){
-    //   console.log(cantidad)
-    //   this.https.InsertData(critico,noParte,marca,descripcion,frecuenciaCambio,cantidad, "ASP", "JUST")
-    // }
-
-    // console.log(this.touchedRows);
   }
 
   toggleTheme() {

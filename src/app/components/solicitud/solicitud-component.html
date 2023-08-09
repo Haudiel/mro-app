@@ -170,23 +170,24 @@
     </div>
 
 
-    <div>
+    <div class="col" style="overflow: scroll;">
       <div>
         <p class="p-3 h4">Nombre del solicitante: {{nomEmpleadoBnv}}</p>
         <p class="p-3 h4">Departamento: {{dept}}</p>
         <p class="p-3 h4">Folio: {{folio}}</p>
       </div>
-      <div>
+      <div class="col">
+        <div class="containerfluid">
 
-        <form [formGroup]="userTable" class="p-3">
-          <table class="table table-border" [ngClass]="{'table-dark': mode}">
+          <form [formGroup]="userTable" class="p-3">
+            <table class="table table-striped table-hover" [ngClass]="{'table-dark': mode}">
             <thead class="text-nowrap">
-              <th>Critico (Si/NO) <span class="ui-column-resizer" dragableColumn> </span></th>
-              <th>No. Parte de fabricante<span class="ui-column-resizer" dragableColumn> </span></th>
-              <th>Marca<span class="ui-column-resizer" dragableColumn> </span></th>
-              <th>Descripción<span class="ui-column-resizer" dragableColumn> </span></th>
-              <th>Frecuencia de cambio<span class="ui-column-resizer" dragableColumn> </span></th>
-              <th>Cantidad instalada<span class="ui-column-resizer" dragableColumn> </span></th>
+              <th>Critico (Si/NO) </th>
+              <th>No. Parte de fabricante</th>
+              <th>Marca</th>
+              <th>Descripción</th>
+              <th>Frecuencia de cambio</th>
+              <th>Cantidad instalada</th>
               <th></th>
             </thead>
             <tbody>
@@ -259,18 +260,12 @@
           <div class="action-container">
             <button mat-raised-button type="submit" (click)="addRow()">Add row</button>
             <button mat-raised-button [disabled]="userTable.invalid" type="submit"
-              (click)="submitForm()">Submit</button>
+            (click)="submitForm()">Submit</button>
           </div>
         </form>
       </div>
-
-      <div class="output">
-        <p>Form Data: {{userTable.value | json}}</p>
-        <p>Is Valid: {{userTable.valid}}</p>
-      </div>
     </div>
-
-
+    </div>
 
   </main>
 
