@@ -42,6 +42,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 @NgModule({
   exports: [
@@ -89,6 +90,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     ScrollingModule,
     MatFormFieldModule,
     NgxDatatableModule,
+    NgxMatFileInputModule
   ]
 })
 export class MaterialModule {}

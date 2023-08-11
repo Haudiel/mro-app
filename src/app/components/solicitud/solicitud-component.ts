@@ -66,6 +66,7 @@ export class SolicitudComponent implements OnInit {
       descr: ['', [Validators.required]],
       frecuencia: ['', [Validators.required, Validators.maxLength(10)]],
       cantidad: ['', [Validators.required, Validators.maxLength(10)]],
+      file: [''],
       isEditable: [true]
     });
   }

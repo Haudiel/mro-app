@@ -171,100 +171,116 @@
 
 
     <div class="col" style="overflow: scroll;">
-      <div>
-        <p class="p-3 h4">Nombre del solicitante: {{nomEmpleadoBnv}}</p>
-        <p class="p-3 h4">Departamento: {{dept}}</p>
-        <p class="p-3 h4">Folio: {{folio}}</p>
+      <div class="uno">
+        <div class="dos">
+          <p class="p-3 h4">Nombre del solicitante: {{nomEmpleadoBnv}}</p>
+          <p class="p-3 h4">Departamento: {{dept}}</p>
+        </div>
+        <div class="dos">
+          <p class="p-3 h4">Folio: {{folio}}</p>
+          <mat-form-field class="p-3" color="blue">
+            <mat-label>Fecha de vencimiento</mat-label>
+            <input matInput [matDatepicker]="picker1">
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
       </div>
       <div class="col">
         <div class="containerfluid">
 
           <form [formGroup]="userTable" class="p-3">
             <table class="table table-striped table-hover" [ngClass]="{'table-dark': mode}">
-            <thead class="text-nowrap">
-              <th>Critico (Si/NO) </th>
-              <th>No. Parte de fabricante</th>
-              <th>Marca</th>
-              <th>Descripción</th>
-              <th>Frecuencia de cambio</th>
-              <th>Cantidad instalada</th>
-              <th></th>
-            </thead>
-            <tbody>
-              <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
-                <tr *ngIf="group.get('isEditable')?.value" [formGroupName]="i">
-                  <td>
-                    <mat-form-field>
-                      <mat-select formControlName="critico">
-                        <mat-option value="SI">SI</mat-option>
-                        <mat-option value="NO">NO</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </td>
-                  <td>
-                    <mat-form-field>
-                      <input matInput type="text" formControlName="noParteFab">
-                    </mat-form-field>
-                  </td>
-                  <td>
-                    <mat-form-field>
-                      <input matInput type="text" formControlName="marca">
-                    </mat-form-field>
-                  </td>
-                  <td>
-                    <mat-form-field>
-                      <input matInput type="text" formControlName="descr">
-                    </mat-form-field>
-                  </td>
-                  <td>
-                    <mat-form-field>
-                      <input matInput type="number" min="0" formControlName="frecuencia">
-                    </mat-form-field>
-                  </td>
-                  <td>
-                    <mat-form-field>
-                      <input matInput type="number" min="0" formControlName="cantidad">
-                    </mat-form-field>
-                  </td>
-                  <td>
-                    <mat-icon class="delete" (click)="deleteRow(i)">delete_forever</mat-icon>
-                    <mat-icon class="done" (click)="doneRow(group)">done</mat-icon>
-                  </td>
-                </tr>
-                <tr *ngIf="!group.get('isEditable')?.value">
-                  <td>
-                    {{group.get('critico')?.value}}
-                  </td>
-                  <td>
-                    {{group.get('noParteFab')?.value}}
-                  </td>
-                  <td>
-                    {{group.get('marca')?.value}}
-                  </td>
-                  <td>
-                    {{group.get('descr')?.value}}
-                  </td>
-                  <td>
-                    {{group.get('frecuencia')?.value}}
-                  </td>
-                  <td>
-                    {{group.get('cantidad')?.value}}
-                  </td>
-                  <td>
-                    <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
-                  </td>
-                </tr>
-              </ng-container>
-            </tbody>
-          </table>
-          <div class="action-container">
-            <button mat-raised-button type="submit" (click)="addRow()">Agregar</button>
-            <button mat-raised-button [disabled]="userTable.invalid" type="submit"
-            (click)="submitForm()">Submit</button>
-          </div>
-        </form>
+              <thead class="text-nowrap">
+                <th>Critico (Si/NO) </th>
+                <th>No. Parte de fabricante</th>
+                <th>Marca</th>
+                <th>Descripción</th>
+                <th>Frecuencia de cambio</th>
+                <th>Cantidad instalada</th>
+                <th>File</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
+                  <tr *ngIf="group.get('isEditable')?.value" [formGroupName]="i">
+                    <td>
+                      <mat-form-field>
+                        <mat-select formControlName="critico">
+                          <mat-option value="SI">SI</mat-option>
+                          <mat-option value="NO">NO</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field>
+                        <input matInput type="text" formControlName="noParteFab">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field>
+                        <input matInput type="text" formControlName="marca">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field>
+                        <input matInput type="text" formControlName="descr">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field>
+                        <input matInput type="number" min="0" formControlName="frecuencia">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field>
+                        <input matInput type="number" min="0" formControlName="cantidad">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <ngx-mat-file-input appearance="icon">
+                        <mat-icon ngxMatFileInputIcon>attach_file</mat-icon>
+                      </ngx-mat-file-input>
+                    </td>
+                    <td>
+                      <mat-icon class="delete" (click)="deleteRow(i)">delete_forever</mat-icon>
+                      <mat-icon class="done" (click)="doneRow(group)">done</mat-icon>
+                    </td>
+                  </tr>
+                  <tr *ngIf="!group.get('isEditable')?.value">
+                    <td>
+                      {{group.get('critico')?.value}}
+                    </td>
+                    <td>
+                      {{group.get('noParteFab')?.value}}
+                    </td>
+                    <td>
+                      {{group.get('marca')?.value}}
+                    </td>
+                    <td>
+                      {{group.get('descr')?.value}}
+                    </td>
+                    <td>
+                      {{group.get('frecuencia')?.value}}
+                    </td>
+                    <td>
+                      {{group.get('cantidad')?.value}}
+                    </td>
+                    <td>
+                      <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+            <div class="action-container">
+              <button mat-raised-button type="submit" (click)="addRow()">Agregar</button>
+              <button mat-raised-button [disabled]="userTable.invalid" type="submit"
+                (click)="submitForm()">Submit</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
 
   </main>

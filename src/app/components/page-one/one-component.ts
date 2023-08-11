@@ -19,15 +19,26 @@ export interface Tile {
 })
 
 
-export class OnePageComponent implements OnInit{
+export class OnePageComponent implements OnInit {
 
   constructor(private storage: StorageService, public router: Router, private https: HttpsService, private navigationService: NavigationService) {
   }
 
-  objetosPorFolio: { [folio: string]: any[] } = {};
+  agrupado: { [folio: string]: any[] } = {};
 
   nomEmpleadoBnv = this.storage.empleadoBnvGet()
   Active: String = ''
+
+  folio: string
+  nombre: string
+  critico: string
+  noParte: string
+  marca: string
+  descripcion: string
+  frecuencia: string
+  cantidad: string
+  fecha: string
+  linea:string
 
   ngOnInit(): void {
     // Establecer el estado de la navegación a true cuando se carga la segunda página.
@@ -35,20 +46,43 @@ export class OnePageComponent implements OnInit{
 
     this.https.GetDataSolicitud().subscribe(data => {
       console.log(data)
-      data.forEach((objeto:any) => {
-        const folio = objeto.folio;
-
-        // Si el folio no existe en el objeto de agrupación, lo creamos como un arreglo vacío
-        if (!this.objetosPorFolio[folio]) {
-          this.objetosPorFolio[folio] = [];
+      data.forEach((registro: any) => {
+        if (!this.agrupado[registro.folio]) {
+          this.agrupado[registro.folio] = [];
         }
-
-        // Agregamos el objeto actual al arreglo correspondiente al folio
-        this.objetosPorFolio[folio].push(objeto);
+        this.agrupado[registro.folio].push({
+          nombre: registro.nombre,
+          critico: registro.critico,
+          noParte: registro.noParte,
+          marca: registro.marca,
+          descripcion: registro.descripcion,
+          frecuencia: registro.frecuencia,
+          cantidad: registro.cantidad,
+          fecha: registro.fecha,
+          linea_estacion: registro.linea
+        });
       });
-    })
 
-    console.log(this.objetosPorFolio)
+      for (this.folio in this.agrupado) {
+        console.log(this.folio + ":");
+        this.agrupado[this.folio].forEach((registro: any) => {
+          console.log(JSON.stringify(registro, null, 2));
+          this.nombre = registro.nombre;
+          this.critico = registro.critico;
+          this.noParte = registro.noParte;
+          this.marca = registro.marca;
+          this.descripcion = registro.descripcion;
+          this.frecuencia = registro.frecuencia;
+          this.cantidad = registro.cantidad;
+          this.fecha = registro.fecha;
+          this.linea = registro.linea_estacion;
+        });
+        console.log("-".repeat(40));
+      }
+    });
+
+
+    // console.log(this.agrupado);
 
   }
 
@@ -58,7 +92,7 @@ export class OnePageComponent implements OnInit{
   submit() {
   }
 
-  Home(){
+  Home() {
     this.router.navigateByUrl('login')
   }
 
