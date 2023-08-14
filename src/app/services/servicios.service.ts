@@ -34,7 +34,7 @@ export class HttpsService {
   }
 
 
-  InsertMRO( critico: string, noParte: string, marca:string, desc: string, frecuencia:number, cantidad: number, linea:string, just:string) {
+  InsertMRO(critico: string, noParte: string, marca: string, desc: string, frecuencia: number, cantidad: number, linea: string, just: string) {
 
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
@@ -60,7 +60,16 @@ export class HttpsService {
     return this.http.post<any>('http://localhost:5016/api/Usuarios/InsertData', skipLot, httpOptions);
   }
 
-  GetDataSolicitud(){
+  GetDataSolicitud() {
     return this.http.get<any>(this.url + `Usuarios/GetDataSolicitud?emplid=${this.storage.noEmpleadoGet()}`);
   }
+
+  GetUser() {
+    const headerOptions = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>('http://172.19.130.25/PublishApiLogin/api/Usuario/ObtenerLogin', { withCredentials: true });
+  }
+
+
 }

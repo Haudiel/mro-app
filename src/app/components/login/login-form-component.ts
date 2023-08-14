@@ -34,6 +34,9 @@ export class LoginFormComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // this.https.GetUser().subscribe(data => {
+    //   console.log(data)
+    // })
   }
 
   submit() {
